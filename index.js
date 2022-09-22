@@ -3,7 +3,7 @@ const { ApolloServer, gql } = require('apollo-server');
 const typeDefs = gql `
 
   type Deck {
-    id: String!
+    id: ID!
     image: String!
     type: String!
     brand: String!
@@ -12,12 +12,20 @@ const typeDefs = gql `
     price: Float!
     onSale: Boolean!
     description: String!
+    category: Category
   }
 
+  type Category{
+    id: ID!
+    name: String!
+    decks: [Deck!]!
+  }
  
   type Query {
     decks: [Deck!]
     deck(id: ID!): Deck
+    categories: [Category!]!
+    category(id: ID!): Category
     
   }
 `;
@@ -31,6 +39,7 @@ const decks = [{
         price: 75.80,
         onSale: true,
         description: "something here",
+        categoryId: "12351231",
     },
     {
         id: "7133747393-273727hhs",
@@ -42,6 +51,7 @@ const decks = [{
         price: 125.00,
         onSale: false,
         description: "something here",
+        categoryId: "12345",
     },
     {
         id: "783747393-273727hhs112",
@@ -53,6 +63,7 @@ const decks = [{
         price: 68.00,
         onSale: false,
         description: "something here",
+        categoryId: "12351231",
     },
     {
         id: "783747393-273727hhs123",
@@ -64,6 +75,7 @@ const decks = [{
         price: 175.88,
         onSale: true,
         description: "something here",
+        categoryId: "3849839",
     },
     {
         id: "783747393-1212273727hhs",
@@ -75,6 +87,7 @@ const decks = [{
         price: 80.88,
         onSale: false,
         description: "This is a prod deck of Chad Muska",
+        categoryId: "12351231",
     },
     {
         id: "11783747393-273727hhs",
@@ -86,6 +99,7 @@ const decks = [{
         price: 500.88,
         onSale: true,
         description: "Some description here",
+        categoryId: "12345",
     },
     {
         id: "783747393-273727hhs",
@@ -97,6 +111,7 @@ const decks = [{
         price: 59.88,
         onSale: true,
         description: "Some description here",
+        categoryId: "12345",
     },
     {
         id: "783211747393-273727hhs",
@@ -108,8 +123,20 @@ const decks = [{
         price: 159.88,
         onSale: true,
         description: "Some description here",
+        categoryId: "12345",
     },
 ];
+
+const categories = [{
+    id: "12345",
+    name: "Longboard Complete",
+}, {
+    id: "12351231",
+    name: "Longboard Decks",
+}, {
+    id: "3849839",
+    name: "Trucks",
+}, ];
 
 
 const resolvers = {
@@ -117,11 +144,27 @@ const resolvers = {
         decks: () => decks,
         deck: (parent, args, context) => {
             const productID = args.id;
-            const product = decks.find(deck => deck.id === productID);
-            if (!product) return null;
-            return product;
+            return decks.find(deck => deck.id === productID);
+        },
+        categories: () => categories,
+        category: (parent, args, context) => {
+            const { id } = args;
+            return categories.find((category) => category.id === id);
         }
     },
+
+    Category: {
+        decks: (parent, args, context) => {
+            const categoryId = parent.id;
+            return decks.filter((deck) => deck.categoryId === categoryId);
+        }
+    },
+    Deck: {
+        category: (parent, args, context) => {
+            const categoryId = parent.categoryId;
+            return categories.find((category) => category.id === categoryId);
+        }
+    }
 };
 const {
     ApolloServerPluginLandingPageLocalDefault
