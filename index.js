@@ -98,6 +98,17 @@ const decks = [{
         onSale: true,
         description: "Some description here",
     },
+    {
+        id: "783211747393-273727hhs",
+        image: "img-8",
+        type: 'SpeedBoard',
+        brand: 'Some Brand here',
+        deckLenght: 34,
+        construction: 'Plastic',
+        price: 159.88,
+        onSale: true,
+        description: "Some description here",
+    },
 ];
 
 
