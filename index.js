@@ -3,6 +3,7 @@ const { typeDefs } = require("./schema");
 const { Query } = require("./resolvers/Query");
 const { Category } = require("./resolvers/Category");
 const { Deck } = require("./resolvers/Deck");
+const { Mutation } = require("./resolvers/Mutation");
 
 
 const {
@@ -16,6 +17,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers: {
         Query,
+        Mutation,
         Category,
         Deck,
     },

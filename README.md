@@ -6,6 +6,7 @@
 ---
 ## How to run the app? 
  - ### Run the command: _npm run dev_
+ - ### Run the command: _npm install uuid_
  - ### Open _http://localhost:4000/_ in your browser
  - ### Write your query: 
 ```javascript
@@ -63,3 +64,16 @@ query{
 ```
 _When you filter by rating it will give also the products with higher rating.
 For example if you apply filter rating: 2 it will give you also the 3,4,5 rating_.
+
+_By using Mutations we cann update our data. Using the example below we can add new category, which
+will generate uuid_
+```javascript
+mutation{
+  addCategory(input: {
+    name: "Accessories"
+  }){
+    id
+    name
+  } 
+}
+```

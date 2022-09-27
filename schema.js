@@ -27,7 +27,11 @@ exports.typeDefs = gql `
     deck(id: ID!): Deck
     categories: [Category!]!
     category(id: ID!): Category
-    
+  }
+
+  type Mutation {
+    addCategory(input: addCategoryInput!): Category!
+
   }
 
   type Review {
@@ -41,5 +45,9 @@ exports.typeDefs = gql `
   input DecksFilterInput{
     onSale: Boolean
     avgRating: Int
+  }
+
+  input addCategoryInput{
+    name: String!
   }
 `;
