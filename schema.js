@@ -19,11 +19,11 @@ exports.typeDefs = gql `
   type Category{
     id: ID!
     name: String!
-    decks: [Deck!]!
+    decks(filter: DecksFilterInput): [Deck!]!
   }
  
   type Query {
-    decks: [Deck!]
+    decks(filter: DecksFilterInput): [Deck!]
     deck(id: ID!): Deck
     categories: [Category!]!
     category(id: ID!): Category
@@ -36,5 +36,10 @@ exports.typeDefs = gql `
     title: String!
     comment: String!
     rating: Int!
+  }
+
+  input DecksFilterInput{
+    onSale: Boolean
+    avgRating: Int
   }
 `;

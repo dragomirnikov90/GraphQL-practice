@@ -5,7 +5,25 @@
 - _GraphQL_
 ---
 ## How to run the app? 
-### Run the command: _npm run dev_
+ - ### Run the command: _npm run dev_
+ - ### Open _http://localhost:4000/_ in your browser
+ - ### Write your query: 
+```javascript
+query{
+  deck(id: "783747393-1212273727hhs"){
+    type
+    description
+    image
+    price
+    reviews {
+      rating
+      comment
+      title
+    }
+    
+  }
+}
+```
 
 ---
 ## What does the application do?
@@ -30,3 +48,18 @@ _And also you must import the data from the db.js_:
 ```javascript
 const { categories, decks } = require("../db.js");
 ```
+
+_Add your filter_:
+```javascript
+query{
+  decks(filter: {
+    onSale: true
+  }) {
+    type
+    price
+    onSale
+  }
+}
+```
+_When you filter by rating it will give also the products with higher rating.
+For example if you apply filter rating: 2 it will give you also the 3,4,5 rating_.
