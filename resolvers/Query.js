@@ -1,8 +1,8 @@
 const { categories, decks, reviews } = require("../db.js");
 
 exports.Query = {
-    decks: (parent, { filter }, { decks }) => {
-        let filteredDecks = decks;
+    decks: (parent, { filter }, { db }) => {
+        let filteredDecks = db.decks;
 
         if (filter) {
             const { onSale, avgRating } = filter
@@ -16,7 +16,7 @@ exports.Query = {
                 filteredDecks = filteredDecks.filter((deck) => {
                     let sumRating = 0;
                     let numberOfReviews = 0;
-                    reviews.forEach(review => {
+                    db.reviews.forEach(review => {
                         if (review.productId === deck.id) {
                             sumRating += review.rating;
                             numberOfReviews++;
@@ -31,13 +31,13 @@ exports.Query = {
         }
         return filteredDecks;
     },
-    deck: (parent, args, context) => {
+    deck: (parent, args, { db }) => {
         const productID = args.id;
-        return decks.find(deck => deck.id === productID);
+        return db.decks.find(deck => deck.id === productID);
     },
-    categories: () => categories,
-    category: (parent, args, context) => {
+    categories: (parent, args, { db }) => db.categories,
+    category: (parent, args, { db }) => {
         const { id } = args;
-        return categories.find((category) => category.id === id);
+        return db.categories.find((category) => category.id === id);
     }
 };

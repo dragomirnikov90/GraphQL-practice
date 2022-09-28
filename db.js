@@ -140,7 +140,7 @@ const reviews = [{
     productId: "783747393-273727hhs112",
 }, ];
 
-module.exports = {
+exports.db = {
     decks,
     categories,
     reviews,

@@ -1,9 +1,9 @@
 const { decks } = require("../db.js");
 
 exports.Category = {
-    decks: ({ id: categoryId }, { filter }, { decks }) => {
+    decks: ({ id: categoryId }, { filter }, { db }) => {
         //const categoryId = parent.id;
-        const categoryDecks = decks.filter((deck) => deck.categoryId);
+        const categoryDecks = db.decks.filter((deck) => deck.categoryId);
         let filteredCategoryDecks = categoryDecks;
         if (filter) {
             if (filter.onSale === true) {

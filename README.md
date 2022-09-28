@@ -77,3 +77,16 @@ mutation{
   } 
 }
 ```
+_If you want to delete whole category of products, you will be able to keep the products inside the category.
+They will appear with category = null_.
+```javascript
+mutation
+{deleteCategory(id: "12351231")
+}
+```
+_If you want to delete a product, the review will be deleted also_
+```javascript
+mutation{
+  deleteProduct(id: " ** ")
+}
+```

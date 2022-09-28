@@ -31,7 +31,9 @@ exports.typeDefs = gql `
 
   type Mutation {
     addCategory(input: addCategoryInput!): Category!
-
+    addDeck(input: addDeckInput!): Deck!
+    deleteCategory(id: ID!): Boolean!
+    deleteProduct(id: ID!): Boolean!
   }
 
   type Review {
@@ -49,5 +51,16 @@ exports.typeDefs = gql `
 
   input addCategoryInput{
     name: String!
+  }
+  input addDeckInput{
+    image: String!
+    type: String!
+    brand: String!
+    construction: String!
+    deckLenght: Int!  
+    price: Float!
+    onSale: Boolean!
+    description: String!
+    categoryId: String! 
   }
 `;

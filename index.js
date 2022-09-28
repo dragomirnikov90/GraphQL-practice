@@ -4,13 +4,13 @@ const { Query } = require("./resolvers/Query");
 const { Category } = require("./resolvers/Category");
 const { Deck } = require("./resolvers/Deck");
 const { Mutation } = require("./resolvers/Mutation");
-
+const { db } = require("./db");
 
 const {
     ApolloServerPluginLandingPageLocalDefault
 } = require('apollo-server-core');
 const { isConstValueNode } = require('graphql');
-const { decks, categories, reviews } = require('./db');
+//const { decks, categories, reviews } = require('./db');
 
 
 const server = new ApolloServer({
@@ -24,9 +24,7 @@ const server = new ApolloServer({
     csrfPrevention: true,
     cache: 'bounded',
     context: {
-        categories,
-        decks,
-        reviews,
+        db,
     },
     plugins: [
         ApolloServerPluginLandingPageLocalDefault({ embed: true }),
