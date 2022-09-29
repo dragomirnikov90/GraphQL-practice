@@ -29,4 +29,26 @@ exports.Mutation = {
         db.reviews = db.reviews.filter(review => review.productId !== id);
         return true;
     },
+    deleteReview: (parent, { id }, { db }) => {
+        db.reviews = db.reviews.filter(review => review.id !== id);
+        return true;
+    },
+    updateCategory: (parent, { id, input }, { db }) => {
+        const index = db.categories.findIndex((category) => category.id === id);
+        if (index === -1) return null;
+        db.categories[index] = {
+            ...db.categories[index],
+            ...input
+        };
+        return db.categories[index];
+    },
+    updateDeck: (parent, { id, input }, { db }) => {
+        const index = db.decks.findIndex((deck) => deck.id === id);
+        if (index === -1) return null;
+        db.decks[index] = {
+            ...db.decks[index],
+            ...input
+        };
+        return db.decks[index];
+    },
 };

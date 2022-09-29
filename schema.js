@@ -34,6 +34,9 @@ exports.typeDefs = gql `
     addDeck(input: addDeckInput!): Deck!
     deleteCategory(id: ID!): Boolean!
     deleteProduct(id: ID!): Boolean!
+    deleteReview(id: ID!): Boolean!
+    updateCategory(id: ID!, input: updateCategoryInput!): Category
+    updateDeck(id: ID!, input: updateDeckInput!): Deck
   }
 
   type Review {
@@ -52,7 +55,23 @@ exports.typeDefs = gql `
   input addCategoryInput{
     name: String!
   }
+
+  input updateCategoryInput{
+    name: String!
+  }
+
   input addDeckInput{
+    image: String!
+    type: String!
+    brand: String!
+    construction: String!
+    deckLenght: Int!  
+    price: Float!
+    onSale: Boolean!
+    description: String!
+    categoryId: String
+  }
+  input updateDeckInput{
     image: String!
     type: String!
     brand: String!

@@ -90,3 +90,25 @@ mutation{
   deleteProduct(id: " ** ")
 }
 ```
+_Also you can update the data:_
+```javascript
+
+mutation{
+  updateDeck(id: "7837473793-21123727hhs", 
+  input: {
+        image: "img-7",
+        type: "PennyBoard",
+        brand: "Some Updated!!",
+        deckLenght: 20,
+        construction: "Plastic",
+        price: 59.88,
+        onSale: true,
+        description: "Some description here",
+        categoryId: "12345",
+  }){
+    type
+    brand
+  }
+}
+
+```
